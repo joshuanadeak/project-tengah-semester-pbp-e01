@@ -30,6 +30,12 @@ This module will display the watchlists of stocks available in the market. It al
 1. Admin : An admin can add and delete stocks and its properties to the watchlist that visible to the user.
 2. User : A user can interact with available stocks and their current stocks. User can buy some stocks that available at the watchlists and sold some stocks they have.
 
+### 4. Registration For Companies and Corporates - Ridho Mulia (2006597866)
+This module will provide a registration page for companies and corporates to register themselves as special users on the site. 
+`The roles in this module are as follows:
+1. Admin : An admin can see list of companies that have registered on the website. Admin also presents data about the company in other modules such as for Investing in Stocks.
+2. User : A user can register their company as an entity on the site. User will provide data about the company such as the name of the company and estimation about the price of stock of the company.
+
 ### 6. Trivia on Trading - Joan Isva Shanti Andrea (2106707712)
 This module will be a feature where users can test and improve their knowledge on trading. There will be trivia questions available for the users to answers. When users finished answering, they can submit their answer and get their feedback. The roles in this feature are as follows:
 1. Admin : An admin can see the results of the users who have submitted their answers.
