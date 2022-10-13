@@ -1,62 +1,29 @@
-# Template Proyek Django PBP
+# Proyek Tengah Semester Kelompok E01
 
-Pemrograman Berbasis Platform (CSGE602022) - diselenggarakan oleh Fakultas Ilmu Komputer Universitas Indonesia, Semester Ganjil 2022/2023
+## Topic : Trade and Investment
 
-*Read this in other languages: [Indonesian](README.md), [English](README.en.md)*
+## (Taruh Ide Nama, Misal: Investops, Tradio, Investex, Zenvest, Omniconomy, etc.)
 
-## Pendahuluan
+## Our Group's Members (E01)
+1. Christopher Nathanael Wijaya
+2. Joshua Mihai Daniel Nadeak
+3. Joan Isva Shanti Andrea
+4. Muhammad Fahreza Azka Arafat
+5. Alisya Andiny Alhabsyi
+6. Ridho Mulia
 
-Repositori ini merupakan sebuah template yang dirancang untuk membantu mahasiswa yang sedang mengambil mata kuliah Pemrograman Berbasis Platform (CSGE602022) mengetahui struktur sebuah proyek aplikasi Django serta file dan konfigurasi yang penting dalam berjalannya aplikasi. Kamu dapat dengan bebas menyalin isi dari repositori ini atau memanfaatkan repositori ini sebagai pembelajaran sekaligus awalan dalam membuat sebuah proyek Django.
+## Links for The Application
+The app can be accessed [here](https://projecttengahsemesterpbpe01.herokuapp.com/)
 
-## Cara Menggunakan
+## Backstory of The Application
+Modern economy is one of the most complex structure in human civilization, that have been formed from the early days of the humans until the era of digital technology. It puts everybody, you and me included, in it's structure of supply and demand. And because of this, the will of people to "bond" with it, by investing for instance, have been higher than ever. That's why we need a system that can provide reliable and accurate information about trading and investment. our target is that trading and investment can be accessed by everyone, from corporates to even a person that has never heard about it. That's why we created this app, that can provide all the main needs for trading and investment. This includes, learning about investing in stocks and crypto, understanding about companies and corporate, trivia to understand investing, and also a suggestion box for any new ideas. 
 
-Apabila kamu ingin menggunakan repositori ini sebagai repositori awalan yang nantinya akan kamu modifikasi:
-
-1. Buka laman GitHub repositori templat kode, lalu klik tombol "**Use this template**"
-   untuk membuat salinan repositori ke dalam akun GitHub milikmu.
-2. Buka laman GitHub repositori yang dibuat dari templat, lalu gunakan perintah
-   `git clone` untuk menyalin repositorinya ke suatu lokasi di dalam sistem
-   berkas (_filesystem_) komputermu:
-
-   ```shell
-   git clone <URL ke repositori di GitHub> <path ke suatu lokasi di filesystem>
-   ```
-3. Masuk ke dalam repositori yang sudah di-_clone_ dan jalankan perintah berikut
-   untuk menyalakan _virtual environment_:
-
-   ```shell
-   python -m venv env
-   ```
-4. Nyalakan environment dengan perintah berikut:
-
-   ```shell
-   # Windows
-   .\env\Scripts\activate
-   # Linux/Unix, e.g. Ubuntu, MacOS
-   source env/bin/activate
-   ```
-5. Install dependencies yang dibutuhkan untuk menjalankan aplikasi dengan perintah berikut:
-
-   ```shell
-   pip install -r requirements.txt
-   ```
-
-6. Jalankan aplikasi Django menggunakan server pengembangan yang berjalan secara
-   lokal:
-
-   ```shell
-   python manage.py runserver
-   ```
-7. Bukalah `http://localhost:8000` pada browser favoritmu untuk melihat apakah aplikasi sudah berjalan dengan benar.
-
-## Contoh Deployment 
-
-Pada template ini, deployment dilakukan dengan memanfaatkan GitHub Actions sebagai _runner_ dan Heroku sebagai platform Hosting aplikasi. 
-
-Untuk melakukan deployment, kamu dapat melihat instruksi yang ada pada [Tutorial 0](https://pbp-fasilkom-ui.github.io/ganjil-2023/assignments/tutorial/tutorial-0).
-
-Untuk contoh aplikasi Django yang sudah di deploy, dapat kamu akses di [https://django-pbp-template.herokuapp.com/](https://django-pbp-template.herokuapp.com/)
-
-## Credits
-
-Template ini dibuat berdasarkan [PBP Ganjil 2021](https://gitlab.com/PBP-2021/pbp-lab) yang ditulis oleh Tim Pengajar Pemrograman Berbasis Platform 2021 ([@prakashdivyy](https://gitlab.com/prakashdivyy)) dan [django-template-heroku](https://github.com/laymonage/django-template-heroku) yang ditulis oleh [@laymonage, et al.](https://github.com/laymonage). Template ini dirancang sedemikian rupa sehingga mahasiswa dapat menjadikan template ini sebagai awalan serta acuan dalam mengerjakan tugas maupun dalam berkarya.
+## Modules To Be Implemented
+1. Main Page
+2. Investing in Crypto
+3. Investing in Stocks
+4. Registration For Companies and Corporates
+5. E-Learning on Trading
+6. Trivia on Trading
+7. Suggestion Box
+etc. (for now)
