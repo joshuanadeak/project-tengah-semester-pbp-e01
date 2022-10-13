@@ -36,6 +36,11 @@ This module will provide a registration page for companies and corporates to reg
 1. Admin : An admin can see list of companies that have registered on the website. Admin also presents data about the company in other modules such as for Investing in Stocks.
 2. User : A user can register their company as an entity on the site. User will provide data about the company such as the name of the company and estimation about the price of stock of the company.
 
+### 5. E-Learning on Trading - Alisya Andiny Alhabsyi (2106706281)
+This module will contain articles and e-book links that users can read to gain insight about trading. There will be a discussion forum at the bottom that can be used to conduct questions and answers with other users. The roles in this feature are as follows:
+1. Admin : An admin can see and delete the questions and answers from users on the discussion forum.
+2. User : A user can reply to the discussion forum. User will have a discussion by asking or answering questions about the articles.
+
 ### 6. Trivia on Trading - Joan Isva Shanti Andrea (2106707712)
 This module will be a feature where users can test and improve their knowledge on trading. There will be trivia questions available for the users to answers. When users finished answering, they can submit their answer and get their feedback. The roles in this feature are as follows:
 1. Admin : An admin can see the results of the users who have submitted their answers.
