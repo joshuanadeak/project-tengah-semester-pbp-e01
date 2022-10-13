@@ -27,7 +27,7 @@ Modern economy is one of the most complex structure in human civilization, that 
 ### 6. Trivia on Trading - Joan Isva Shanti Andrea (2106707712)
 This module will be a feature where users can test and improve their knowledge on trading. There will be trivia questions available for the users to answers. When users finished answering, they can submit their answer and get their feedback. The roles in this feature are as follows:
 1. Admin : An admin can see the results of the users who have submitted their answers.
-2. User : A user can answer the questions available, submit their answers, and get their feedback. The feedback would be availbale for the users in a card after submitting. 
+2. User : A user can answer the questions available, submit their answers, and get their feedback. The feedback would be available for the users in the form of a card after submitting. 
  
 ### 7. Suggestion Box - Muhammad Fahreza Azka Arafat (2106752331)
 This app explains itself in it's name, it's a suggestion box where users can give feedback on the app via a form. When the form is successfully submitted, there will be a popup modal saying thank you to the user for giving the feedback. The roles in this app are the following:
