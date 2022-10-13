@@ -25,5 +25,11 @@ Modern economy is one of the most complex structure in human civilization, that 
 4. Registration For Companies and Corporates
 5. E-Learning on Trading
 6. Trivia on Trading
-7. Suggestion Box
+### 7. Suggestion Box - Muhammad Fahreza Azka Arafat (2106752331)
+This app explains itself in it's name, it's a suggestion box where users can give feedback on the app via a form. When the form is successfully submitted, there will be a popup modal saying thank you to the user for giving the feedback. The roles in this app are the following :
+
+1. Admin : An admin can reply to the feedback given by the user. This reply will then be displayed in cards along with the feedback in question.
+2. User : A user can submit a form containing their feedback to this app, this feedback will then be displayed in cards. If it is not replied by the admin yet, the response field will be empty.
+
+To summarize, this app will be similar to the Todolist app.
 etc. (for now)
