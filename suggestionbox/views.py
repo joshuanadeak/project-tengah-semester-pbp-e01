@@ -12,8 +12,9 @@ def showFeedback(request):
     return render(request, 'main_page.html', {'data': data})
 
 def showJson(request):
-    data = UserFeedback.objects.all()
-    return HttpResponse(serializers.serialize('json', data), content_type='application/json')
+    if request.method == 'GET':
+        data = UserFeedback.objects.all()
+        return HttpResponse(serializers.serialize('json', data), content_type='application/json')
 
 @user_passes_test(checkAdmin)
 def replyFeedback(request, id):
