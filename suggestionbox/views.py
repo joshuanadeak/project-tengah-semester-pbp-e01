@@ -28,7 +28,7 @@ def replyFeedback(request, id):
 def giveFeedback(request):
     if request.method == 'POST':
         feedback = UserFeedback(
-            user = request.user,
+            user = "TESTING",
             feedback = request.POST['feedback'],
             reply = 'Belum dibalas'
         )
