@@ -11,7 +11,7 @@ def showFeedback(request):
     data  = UserFeedback.objects.all()
     return render(request, 'main_page.html', {'data': data})
 
-def showJson():
+def showJson(request):
     data = UserFeedback.objects.all()
     return HttpResponse(serializers.serialize('json', data), content_type='application/json')
 
