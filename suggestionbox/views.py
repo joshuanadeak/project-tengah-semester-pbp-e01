@@ -27,10 +27,16 @@ def replyFeedback(request, id):
 
 def giveFeedback(request):
     if request.method == 'POST':
+        flag = False
+        user = "Anonymous"
+        if request.user.is_authenticated:
+            flag = True
+        if flag:
+            user = request.user.username
         feedback = UserFeedback(
-            user = "TESTING",
+            user = user,
             feedback = request.POST['feedback'],
-            reply = 'Belum dibalas'
+            reply = 'Belum dibalas',
         )
         feedback.save()
         return HttpResponse(serializers.serialize('json', [feedback]), content_type='application/json')
