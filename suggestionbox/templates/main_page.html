@@ -1,0 +1,277 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    {% block content %}
+<body>
+    <style>
+        body {
+            padding-top: 5%;
+            padding-right: 2%;
+            padding-left: 2%;
+        }
+
+        @media screen and (max-width: 1600px) {
+            body { padding-top: 100px; }
+        }
+
+        .card {
+            background-image: linear-gradient(to right, #69e218, #009776);
+            color: white;
+            text-shadow: 2px 2px #00000027;
+            padding-top: 3%;
+            padding-bottom: 3%;
+            padding-left: 3%;
+            padding-right: 3%;
+            border-radius: 3%;
+        }
+
+        .card:hover {
+            box-shadow: 0px 2vh 2vw rgb(68, 68, 68);
+            transform: scale(1.05);
+            transition: 0.5s;
+        }
+
+        #feedback-button {
+            margin-bottom: 1%;
+            margin-top: 1%;
+            background-image: linear-gradient(to right, #69e218, #009776);
+            color: white;
+            text-shadow: 2px 2px #00000027;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+
+        #feedback-button:hover {
+            box-shadow: 0px 2vh 2vw rgb(68, 68, 68);
+            transform: scale(1.05);
+            transition: 0.5s;
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+    crossorigin="anonymous"></script>
+    
+    <button type="button" id="feedback-button" class="btn" data-bs-toggle="modal" data-bs-target="#create-modal">Give your feedback!</button>
+
+    <div class="modal fade" id="create-modal" tabindex="-1" aria-labelledby="Give feedback" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title>"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="/suggestionbox/giveFeedback/" id="feedback-form">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="feedback">Feedback</label>
+                            <textarea class="form-control" id="feedback" name="feedback" form="feedback-form"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-6 g-4" id="feedback-container"></div>
+    <div class="modal-container"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        var feedbackContainer = document.getElementById("feedback-container");
+        var modalContainer = document.getElementsByClassName("modal-container");
+        feedbackContainer.innerHTML = "";
+        modalContainer.innerHTML = "";
+        
+        function getJson() {
+        var data = "";  
+        $.ajax({
+            url: "/suggestionbox/showJson/",
+            type: "GET",
+            async: false,
+            success: function (response) {
+                console.log("DATA GET SUCCESSFUL");
+                console.log(response);
+                data = response;
+            }
+        });
+        return data;
+        }
+
+        
+        async function showFeedback() {
+            let feedbacks = getJson();
+            for (let i = 0; i < feedbacks.length; i++) {
+                var fdbk = feedbacks[i].fields.feedback;
+                var rply = feedbacks[i].fields.reply;
+                var id = feedbacks[i].pk;
+                var user = feedbacks[i].fields.user;
+
+                var feedbackCol = document.createElement("div");
+                feedbackCol.className = "col-sm";
+
+                var feedbackCard = document.createElement("div");
+                feedbackCard.className = "card";
+
+                var feedbackCardBody = document.createElement("div");
+                feedbackCardBody.className = "card-body";
+
+                var feedbackCardTitle = document.createElement("h5");
+                feedbackCardTitle.className = "card-title";
+                feedbackCardTitle.innerHTML = "Feedback from " + user;
+
+                var feedbackCardText = document.createElement("p");
+                feedbackCardText.className = "card-text";
+                feedbackCardText.innerHTML = fdbk;
+
+                var feedbackCardReply = document.createElement("p");
+                feedbackCardReply.className = "card-text";
+                feedbackCardReply.innerHTML = "Reply : "+rply;
+                
+                var button = document.createElement("div");
+                button.classList.add("row", "g-2");
+                
+                feedbackCardBody.appendChild(feedbackCardTitle);
+                feedbackCardBody.appendChild(feedbackCardText);
+                feedbackCardBody.appendChild(feedbackCardReply);
+                feedbackCardBody.appendChild(button);
+                feedbackCard.appendChild(feedbackCardBody);
+                feedbackCol.appendChild(feedbackCard);
+                feedbackContainer.appendChild(feedbackCol);
+
+                var replyModal = document.createElement("div");
+                replyModal.className = "modal fade";
+                replyModal.id = "reply-modal-" + id;
+                replyModal.tabIndex = "-1";
+                replyModal.setAttribute("aria-labelledby", "Reply to feedback");
+                replyModal.setAttribute("aria-hidden", "true");
+
+                var replyModalDialog = document.createElement("div");
+                replyModalDialog.className = "modal-dialog";
+
+                var replyModalContent = document.createElement("div");
+                replyModalContent.className = "modal-content";
+
+                var replyModalHeader = document.createElement("div");
+                replyModalHeader.className = "modal-header";
+
+                var replyModalTitle = document.createElement("h5");
+                replyModalTitle.className = "modal-title";
+
+                var replyModalClose = document.createElement("button");
+                replyModalClose.className = "btn-close";
+                replyModalClose.setAttribute("data-bs-dismiss", "modal");
+                replyModalClose.setAttribute("aria-label", "Close");
+
+                var replyModalBody = document.createElement("div");
+                replyModalBody.className = "modal-body";
+
+                var replyModalForm = document.createElement("form");
+                replyModalForm.method = "POST";
+                replyModalForm.action = "/suggestionbox/replyFeedback/" + id + "/";
+                replyModalForm.id = "reply-form-" + id;
+
+                var replyModalCsrf = document.createElement("input");
+                replyModalCsrf.type = 'hidden';
+                replyModalCsrf.name = 'csrfmiddlewaretoken';
+                replyModalCsrf.value = '{{ csrf_token }}';
+
+                var replyModalFormGroup = document.createElement("div");
+                replyModalFormGroup.className = "form-group";
+
+                var replyModalLabel = document.createElement("label");
+                replyModalLabel.setAttribute("for", "reply");
+                replyModalLabel.innerHTML = "Reply";
+
+                var replyModalInput = document.createElement("textarea");
+                replyModalInput.className = "form-control";
+                replyModalInput.id = "reply";
+                replyModalInput.name = "reply";
+                replyModalInput.form = "reply-form-" + id;
+
+                var replyModalButton = document.createElement("button");
+                replyModalButton.type = "submit";
+                replyModalButton.className = "btn btn-primary";
+                replyModalButton.innerHTML = "Submit";
+
+                replyModalFormGroup.appendChild(replyModalLabel);
+                replyModalFormGroup.appendChild(replyModalInput);
+                replyModalForm.appendChild(replyModalCsrf);
+                replyModalForm.appendChild(replyModalFormGroup);
+                replyModalForm.appendChild(replyModalButton);
+                replyModalBody.appendChild(replyModalForm);
+                replyModalHeader.appendChild(replyModalTitle);
+                replyModalHeader.appendChild(replyModalClose);
+                replyModalContent.appendChild(replyModalHeader);
+                replyModalContent.appendChild(replyModalBody);
+                replyModalDialog.appendChild(replyModalContent);
+                replyModal.appendChild(replyModalDialog);
+                $(".modal-container").append(replyModal);
+
+                var replyButton = document.createElement("div");
+                replyButton.className = "col-sm";
+                replyButton.innerHTML = '{% if user.is_superuser %} <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#reply-modal-' + id + '">Reply</button> {% endif %}';
+                button.appendChild(replyButton);
+
+                $("#reply-form-" + id).submit(function (e) {
+                    e.preventDefault();
+                    var form = $(this);
+                    var url = form.attr('action');
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: form.serialize(),
+                        success: function (data) {
+                            console.log("DATA POST SUCCESSFUL");
+                            console.log(data);
+                            location.reload();
+                            $("#reply-modal-" + id).modal('hide');
+                        }
+                    });
+                });
+            }
+            }
+            $(document).ready(function () {
+                console.log("READY");
+                showFeedback();
+                $("#feedback-form").on('submit', function () {
+                    event.preventDefault();
+                    var form = $(this);
+                    url = form.attr('action');
+                    method = form.attr('method');
+                    data = {};
+                    
+                    form.find('[name]').each(function (index, value) {
+                        var that = $(this),
+                        name = that.attr('name'),
+                        value = that.val();
+                        data[name] = value;
+                    });
+                    
+                    $.ajax({
+                        url: url,
+                        type: method,
+                        data: data,
+                    success: function (response) {
+                        console.log("DATA POST SUCCESSFUL");
+                        console.log(response);
+                        feedbackContainer.innerHTML = "";
+                        $("#create-modal").modal('hide');
+                        $("#feedback-form")[0].reset();
+                        showFeedback();
+                    }
+                });
+            });
+            
+            return false;
+        });
+    </script>
+</body>
+{% endblock content %}
