@@ -55,7 +55,7 @@
     integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
     crossorigin="anonymous"></script>
     
-    <button type="button" id="feedback-button" class="btn" data-bs-toggle="modal" data-bs-target="#create-modal">Give your feedback!</button>
+    <button type="button" id="feedback-button" class="btn btn-outline-success rounded-pill" data-bs-toggle="modal" data-bs-target="#create-modal">Give your feedback!</button>
 
     <div class="modal fade" id="create-modal" tabindex="-1" aria-labelledby="Give feedback" aria-hidden="true">
         <div class="modal-dialog">
@@ -80,6 +80,20 @@
         </div>
     </div>
 
+    <div class="modal fade" id="thankyou-modal" tabindex="-1" aria-labelledby="Thank you" aria-hidden="true">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <h4>Great!</h4>	
+                    <p>Thank you for your feedback, we'll review it.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-6 g-4" id="feedback-container"></div>
     <div class="modal-container"></div>
 
@@ -112,7 +126,7 @@
                 var fdbk = feedbacks[i].fields.feedback;
                 var rply = feedbacks[i].fields.reply;
                 var id = feedbacks[i].pk;
-                var user = feedbacks[i].fields.user;
+                var user = feedbacks[i].fields.username;
 
                 var feedbackCol = document.createElement("div");
                 feedbackCol.className = "col-sm";
@@ -233,6 +247,7 @@
                             console.log(data);
                             location.reload();
                             $("#reply-modal-" + id).modal('hide');
+                            $("#reply-form-" + id)[0].reset();
                         }
                     });
                 });
@@ -266,10 +281,10 @@
                         $("#create-modal").modal('hide');
                         $("#feedback-form")[0].reset();
                         showFeedback();
+                        $("#thankyou-modal").modal('show');
                     }
                 });
             });
-            
             return false;
         });
     </script>
