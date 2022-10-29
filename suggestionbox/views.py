@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.decorators import login_required
 from suggestionbox.models import UserFeedback
 from django.http import HttpResponse
 from django.core import serializers
@@ -7,6 +8,7 @@ from django.core import serializers
 def checkAdmin(user):
     return user.is_superuser
 
+@login_required(login_url='/authenticate/login/')
 def showFeedback(request):
     data  = UserFeedback.objects.all()
     return render(request, 'main_page.html', {'data': data})
@@ -25,16 +27,12 @@ def replyFeedback(request, id):
         return HttpResponse(serializers.serialize('json', [feedback]), content_type='application/json')
     return HttpResponse("")
 
+@login_required(login_url='/authenticate/login/')
 def giveFeedback(request):
-    if request.method == 'POST':
-        flag = False
-        user = "Anonymous"
-        if request.user.is_authenticated:
-            flag = True
-        if flag:
-            user = request.user.username
+    if request.method == 'POST':   
         feedback = UserFeedback(
-            user = user,
+            user = request.user,
+            username=request.user.username,
             feedback = request.POST['feedback'],
             reply = 'Belum dibalas',
         )
