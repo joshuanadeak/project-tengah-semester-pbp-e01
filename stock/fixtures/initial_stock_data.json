@@ -1,0 +1,20 @@
+[
+    {
+        "model": "stock.saham",
+        "pk": 1,
+        "fields": {
+            "kode_saham": "BBRI",
+            "harga_saham": 9971,
+            "risk": "LOW"
+        }
+    },
+    {
+        "model": "stock.saham",
+        "pk": 2,
+        "fields": {
+            "kode_saham": "ANTM",
+            "harga_saham": 9895,
+            "risk": "HIGH"
+        }
+    }
+]
