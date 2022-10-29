@@ -20,5 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('example_app.urls')),
     path('suggestionbox/', include('suggestionbox.urls')),
+    path('authenticate/', include('authenticate.urls')),
     path('stock/',include('stock.urls')),
 ]
