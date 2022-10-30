@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+{% block meta %}
+<style>
+    body{
+        padding-top: 100px;
+        padding-right: 2%;
+        padding-left: 2%;
+    } 
+</style>
+<title>STOCKKK</title>
+{% endblock meta %}
+
+{% block content %}
+<body>
+    <h1 style="font-family: Kanit;">INVESTOPS WATCHLIST</h1>
+    <table class="table">
+        <tr class="">
+            <th>Kode Saham</th>
+            <th>Price</th>
+            <th>Risk</th>
+        </tr>
+        
+        {% for saham in daftar_saham %}
+        <tr>
+            <td>{{saham.kode_saham}}</td>
+            <td>{{saham.harga_saham}}</td>
+            <td>{{saham.risk}}</td>
+    
+    
+            <td>
+                <button class="btn btn-primary sm"><a href="" style="text-decoration: none; color: white;">Buy</a></button>
+                <button><a href="">Delete</a></button>
+            </td>
+        </tr>
+        
+        {% endfor %}
+        
+    </table>
+    <button onclick="location.href='/stock'"  class="btn btn-success">ADD</button>
+
+</body>
+{% endblock content %}
