@@ -1,0 +1,20 @@
+[
+    {
+        "model": "crypto.crypto",
+        "pk": 1,
+        "fields": {
+            "kode_crypto": "DOGE",
+            "harga_crypto": 2054,
+            "risk": "HIGH"
+        }
+    },
+    {
+        "model": "crypto.crypto",
+        "pk": 2,
+        "fields": {
+            "kode_crypto": "BTC",
+            "harga_crypto": 324525278,
+            "risk": "LOW"
+        }
+    }
+]

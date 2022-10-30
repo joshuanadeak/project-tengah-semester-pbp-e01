@@ -22,4 +22,5 @@ urlpatterns = [
     path('suggestionbox/', include('suggestionbox.urls')),
     path('authenticate/', include('authenticate.urls')),
     path('stock/',include('stock.urls')),
+    path('crypto/',include('crypto.urls')),
 ]
