@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'suggestionbox',
     'authenticate',
     'stock',
+    'crypto',
 ]
 
 MIDDLEWARE = [
