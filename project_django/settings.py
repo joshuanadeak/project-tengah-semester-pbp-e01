@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'authenticate',
     'stock',
     'crypto',
+    'registration'
 ]
 
 MIDDLEWARE = [
