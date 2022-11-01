@@ -111,6 +111,20 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="empty-modal" tabindex="-1" aria-labelledby="Prevent" aria-hidden="true">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <h4>Warning!</h4>	
+                    <p>Please fill in your feedback.</p>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-6 g-4" id="feedback-container"></div>
     <div class="modal-container"></div>
@@ -261,11 +275,13 @@
                         url: url,
                         data: form.serialize(),
                         success: function (data) {
-                            console.log("DATA POST SUCCESSFUL");
-                            console.log(data);
-                            location.reload();
-                            $("#reply-modal-" + id).modal('hide');
-                            $("#reply-form-" + id)[0].reset();
+                            if (Object.keys(data).length != 0) {
+                                console.log("DATA POST SUCCESSFUL");
+                                console.log(data);
+                                location.reload();
+                                $("#reply-modal-" + id).modal('hide');
+                                $("#reply-form-" + id)[0].reset();
+                            }
                         }
                     });
                 });
@@ -293,13 +309,18 @@
                         type: method,
                         data: data,
                     success: function (response) {
-                        console.log("DATA POST SUCCESSFUL");
-                        console.log(response);
-                        feedbackContainer.innerHTML = "";
-                        $("#create-modal").modal('hide');
-                        $("#feedback-form")[0].reset();
+                        if (data['feedback'] != "") {
+                            console.log("DATA POST SUCCESSFUL");
+                            console.log(response);
+                            feedbackContainer.innerHTML = "";
+                            console.log(data)
+                            $("#create-modal").modal('hide');
+                            $("#feedback-form")[0].reset();
+                            $("#thankyou-modal").modal('show');
+                        } else {
+                            $("#empty-modal").modal('show');
+                        }
                         showFeedback();
-                        $("#thankyou-modal").modal('show');
                     }
                 });
             });
