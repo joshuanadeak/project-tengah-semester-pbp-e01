@@ -12,7 +12,7 @@
 
   <!-- Bootstrap icons-->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-  
+
   <!-- Google fonts yang di download yang dipake dilanding page ada font NewsReader, Mulish, Kanit & Signika-->
   <link rel="preconnect" href="https://fonts.gstatic.com" />
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,600;1,600&amp;display=swap"
@@ -22,7 +22,7 @@
     rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet" />
   <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
-  
+
   <!-- Core theme CSS (includes Bootstrap)-->
   <!--BOOTSTRAP nya udah di download & pake nya stylecoba.css bukan stylecoba.css, soalnya yag stylecoba.css udah diganti beberapa-->
   <link href="{% static 'css/style.css' %}" rel="stylesheet" />
@@ -32,49 +32,52 @@
 
 <body>
   <div class="nav-container">
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
-    <div class="container px-5">
-      <a class="navbar-brand fw-bold" style="font-size: 200% ;" href="/">INVESTOPS.</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      Menu
-      <i class="bi-list"></i>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-        <li class="nav-item dropdown me-lg-3">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-          data-bs-toggle="dropdown" aria-expanded="false">
-          Watchlist
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <li><a class="dropdown-item" href="#">Stock</a></li>
-              <li><a class="dropdown-item" href="#">Crypto</a></li>
-            </ul>
-          </li>
-          <!--<li class="nav-item"><a class="nav-link me-lg-3" href="#watchlist">Watchlist</a></li>-->
-          <li class="nav-item"><a class="nav-link me-lg-3" href="#company">Company</a></li>
-          <li class="nav-item"><a class="nav-link me-lg-3" href="#academy">Academy</a></li>
-          <li class="nav-item"><a class="nav-link me-lg-3" href="#quiz">Quiz</a></li>
-          <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'suggestionbox:showFeedback' %}">Feedback</a></li>
-        </ul>
-        {% if user.is_authenticated %}
-        <button onclick="location.href='/authenticate/logout/'" class="btn btn-outline-success rounded-pill px-3 mb-2 mb-lg-0" >
-        <span class="d-flex align-items-center">
-          <span class="small">Logout</span>
-        </span>
-      </button>
-      {% else %}
-      <button onclick="location.href='/authenticate/login/'" class="btn btn-outline-success rounded-pill px-3 mb-2 mb-lg-0" >
-        <span class="d-flex align-items-center">
-          <span class="small">Login</span>
-        </span>
-      </button>
-      {% endif %}
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
+      <div class="container px-5">
+        <a class="navbar-brand fw-bold" style="font-size: 200% ;" href="/">INVESTOPS.</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+          aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="bi-list"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+            <li class="nav-item dropdown me-lg-3">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Watchlist
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="{% url 'stock:show_market' %}">Stock</a></li>
+                <li><a class="dropdown-item" href="#">Crypto</a></li>
+              </ul>
+            </li>
+            <!--<li class="nav-item"><a class="nav-link me-lg-3" href="#watchlist">Watchlist</a></li>-->
+            <li class="nav-item"><a class="nav-link me-lg-3" href="#company">Company</a></li>
+            <li class="nav-item"><a class="nav-link me-lg-3" href="#academy">Academy</a></li>
+            <li class="nav-item"><a class="nav-link me-lg-3" href="#quiz">Quiz</a></li>
+            <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'suggestionbox:showFeedback' %}">Feedback</a>
+            </li>
+          </ul>
+          {% if user.is_authenticated %}
+          <button onclick="location.href='/authenticate/logout/'"
+            class="btn btn-outline-success rounded-pill px-3 mb-2 mb-lg-0">
+            <span class="d-flex align-items-center">
+              <span class="small">Logout</span>
+            </span>
+          </button>
+          {% else %}
+          <button onclick="location.href='/authenticate/login/'"
+            class="btn btn-outline-success rounded-pill px-3 mb-2 mb-lg-0">
+            <span class="d-flex align-items-center">
+              <span class="small">Login</span>
+            </span>
+          </button>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
   </div>
-</nav>
-</div>
   {% block content %}
   {% endblock content %}
 </body>
