@@ -5,25 +5,25 @@
 
 {% block meta %}
 <style>
-    body{
+    body {
         padding-top: 120px;
         padding-right: 7%;
         padding-left: 7%;
         padding-bottom: 5%;
-    } 
+    }
 </style>
-<title>Portofolio</title>
+<title>Investops Stocks Market</title>
 {% endblock meta %}
 
 {% block content %}
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-
-<script src="{% static 'js/ajax_stock.js' %}"></script>
- <!-- <script>
+<script src="{% static 'js/ajax_market.js' %}"></script>
+<!-- <script>
     function getFormData($form) {
         var unindexed_array = $form.serializeArray();
         var indexed_array = {};
@@ -37,44 +37,36 @@
     
     function displayStock(json){
         console.log(json)
-        var button = (pk) => `<button onclick="deleteStock(${pk})" class="btn btn-outline-danger btn-sm rounded-pill">SELL</button>`
-        $("#stock-table").empty()
+        var button = (pk) => `<button onclick="deleteStock(${pk})" class="btn btn-outline-success rounded-pill btn-sm">BUY</button>`
+        $("#market-table").empty()
         for(var i = 0 ;i < json.length ; i++){
             console.log("ini fie")
             console.log(json[i].fields)
-            $("#stock-table").append("<tr><td>" + json[i].fields.kode_saham+"</td><td>"+ json[i].fields.nama_perusahaan+"</td><td>"+ json[i].fields.harga_saham+"</td><td style='color: rgb(4, 169, 4); font-weight: bold'>"+ json[i].fields.risk+"</td><td>"+button(json[i].pk)+"</td></tr>")
+            $("#market-table").append("<tr><td>" + json[i].fields.kode_saham+"</td><td>"+ json[i].fields.nama_perusahaan+"</td><td>"+ json[i].fields.harga_saham+"</td><td style='color: rgb(4, 169, 4); font-weight: bold' >"+ json[i].fields.risk+"</td><td>"+button(json[i].pk)+"</td></tr>")
         }
     }
 
-    function displayNote(json) {
-        console.log("INI MASUK DISPLAY NOTEE")
-        console.log(json)
-        $("#personal-note").text(json[0].fields.catatan)
-    }
-
     function updateStock() {
-        $.getJSON("{% url 'stock:show_stock_json' %}", displayStock);
+        $.getJSON("{% url 'stock:show_market_json' %}", displayStock);
     }
 
     function deleteStock(pk) {
         console.log(pk)
         $.ajax({
-            url: `delete_stock/${pk}`,
+            url: `delete_market/${pk}`,
             type: 'post',
             data: {},
             success: function(){
                 updateStock(),
-                $("#sellModal").modal('show');
+                $("#buyModal").modal('show');
             }
         });
     }
     
     $(document).ready(function () {
-        $.getJSON("{% url 'stock:show_stock_json' %}", displayStock);
-        $.getJSON("{% url 'stock:show_note_json' %}", displayNote);
-        console.log("notenote")
+        $.getJSON("{% url 'stock:show_market_json' %}", displayStock);
         document.getElementById("modalButton").setAttribute('onclick', '$("#formModal").modal("show")');
-
+        console.log("SEBELOM SUBMIT")
         $("#addTaskForm").submit(function (e) {
             e.preventDefault();
             $(".btnClick").prop('disabled', true);
@@ -82,31 +74,31 @@
             var $form = $(this);
             var serializedData = getFormData($form);
             
-            console.log("BELOM MASUK AJAX")
             $.ajax({
-                url: "{% url 'stock:add_note' %}",
+                url: "{% url 'stock:add_stock' %}",
                 type: "POST",
                 data: serializedData,
                 dataType: 'text',
                 success: function (response_data) {
-                    console.log("ENTERRRR")
+                    console.log(response_data)
                     $(".btnClick").prop('disabled', false);
                     $(".btnClick").text('Submit');
-
-                    $.getJSON("{% url 'stock:show_note_json' %}",
-                        displayNote);
+                    $.getJSON("{% url 'stock:show_market_json' %}",
+                        displayStock);
 
                     $("#formModal").modal('hide');
                     $('#addTaskForm').each(function () {
                         this.reset();
                     });
+                    
                 }
             });
         });
     });
-</script>  -->
+</script> -->
 
-<h3 style="font-family: Kanit">{{request.user.username}} <span style="color: rgb(4, 169, 4);">PORTOFOLIO</span></h3>
+<h1 style="font-family: Kanit; display: inline; font-weight: bolder;">INVESTOPS <span style="color: rgb(4, 169, 4); display: inline;">WATCHLIST</span></h1>
+
 <table class="table table-striped">
     <thead>
         <tr class="">
@@ -116,17 +108,17 @@
             <th>Risk</th>
         </tr>
     </thead>
-    <tbody id="stock-table">
+    <tbody id="market-table">
 
     </tbody>
-     
+
 </table>
 
 <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: Mulish; font-weight: bold;">CHANGE NOTE</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: Mulish; font-weight: bold;">ADD STOCK</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="addTaskForm">
@@ -134,41 +126,51 @@
                 <div class="modal-body form-control">
                     <fieldset>
                         
-                        <input class="form-control mb-3" type="text" placeholder="Masukan Note" name="catatan">
-                       
+                        <input class="form-control mb-3" type="text" placeholder="Kode Saham (4 Huruf)" name="kode_saham">
+
+                        <input class="form-control mb-3" type="text" placeholder="Nama Perusahaan" name="nama_perusahaan">
+
+                        <input class="form-control mb-3" type="text" placeholder="Price (1 - 9999)" name="harga_saham">
+
+                        <input class="form-control mb-3" type="text" placeholder="Risk (HIGH / LOW)" name="risk">
+
                     </fieldset>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCEL</button>
-                    <button type="submit" class="btn btn-primary btnClick">CHANGE</button>
+                    <button type="submit" class="btn btn-primary btnClick">ADD</button>
                 </div>
             </form>
-            
+
         </div>
     </div>
 </div>
-<div class="modal fade" id="sellModal" tabindex="-1" aria-labelledby="Thank you" aria-hidden="true">
+
+<div class="modal fade" id="buyModal" tabindex="-1" aria-labelledby="Thank you" aria-hidden="true">
     <div class="modal-dialog modal-confirm">
         <div class="modal-content">
             <div class="modal-header justify-content-center">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body text-center" >
-                <h4 style="font-family: Mulish; font-weight: bold; color: rgb(4, 169, 4)">Penjualan Berhasil!</h4>
+            <div class="modal-body text-center"">
+                <h4 style="font-family: Mulish; font-weight: bold; color: rgb(4, 169, 4)">Pembelian Berhasil!</h4>
                 <h5 style="font-family: Mulish; font-weight: bold; ">Silakan lihat portofolio anda</h5>
             </div>
         </div>
     </div>
 </div>
 <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
-<button class="btn btn-success me-3" type="button" name="change-note" id="modalButton">
-    CHANGE NOTE
-</button>
-<a href="{% url 'stock:show_market' %}" class="btn btn-outline-success">Watchlist</a></div>
 
-<br><br>
-<p style="font-style: italic;"><i class="bi bi-pencil-fill"></i> Note:</p>
-<p style="font-style: italic;">Jangan monopoli pasar saham dengan membeli semua saham ya :)</p>
-<p id="personal-note" style="font-style: italic;"></p>
+{% if user.is_superuser %}
+<button class="btn btn-success me-3" type="button" name="create-stock" id="modalButton">
+    ADD STOCK
+</button>
+{% else %}
+<button class="btn btn-success me-3" type="button" name="create-stock" id="modalButton" disabled>
+    ADD STOCK
+</button>
+{% endif %}
+
+<a href="{% url 'stock:show_stock' %}" class="btn btn-outline-success">Portofolio</a>
 
 {% endblock content %}

@@ -25,6 +25,7 @@
             padding-left: 3%;
             padding-right: 3%;
             border-radius: 3%;
+            box-shadow: 10px 10px 5px -3px rgba(10,222,133,0.75);-webkit-box-shadow: 10px 10px 5px -3px rgba(10,222,133,0.75);-moz-box-shadow: 10px 10px 5px -3px rgba(10,222,133,0.75);
         }
 
         .card:hover {
@@ -55,8 +56,11 @@
     integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
     crossorigin="anonymous"></script>
     
-    <button type="button" id="feedback-button" class="btn btn-outline-success rounded-pill" data-bs-toggle="modal" data-bs-target="#create-modal">Give your feedback!</button>
-
+    {% if user.is_superuser %}
+        <button type="button" id="feedback-button" class="btn btn-outline-success rounded-pill" data-bs-toggle="modal" data-bs-target="#admin-prevention">Give your feedback!</button>
+    {% else %}
+        <button type="button" id="feedback-button" class="btn btn-outline-success rounded-pill" data-bs-toggle="modal" data-bs-target="#create-modal">Give your feedback!</button>
+    {% endif %}
     <div class="modal fade" id="create-modal" tabindex="-1" aria-labelledby="Give feedback" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -89,6 +93,34 @@
                 <div class="modal-body text-center">
                     <h4>Great!</h4>	
                     <p>Thank you for your feedback, we'll review it.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="admin-prevention" tabindex="-1" aria-labelledby="Prevent" aria-hidden="true">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <h4>Warning!</h4>	
+                    <p>An admin cannot give feedback.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="empty-modal" tabindex="-1" aria-labelledby="Prevent" aria-hidden="true">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <h4>Warning!</h4>	
+                    <p>Please fill in your feedback.</p>
                 </div>
             </div>
         </div>
@@ -243,11 +275,13 @@
                         url: url,
                         data: form.serialize(),
                         success: function (data) {
-                            console.log("DATA POST SUCCESSFUL");
-                            console.log(data);
-                            location.reload();
-                            $("#reply-modal-" + id).modal('hide');
-                            $("#reply-form-" + id)[0].reset();
+                            if (Object.keys(data).length != 0) {
+                                console.log("DATA POST SUCCESSFUL");
+                                console.log(data);
+                                location.reload();
+                                $("#reply-modal-" + id).modal('hide');
+                                $("#reply-form-" + id)[0].reset();
+                            }
                         }
                     });
                 });
@@ -275,13 +309,18 @@
                         type: method,
                         data: data,
                     success: function (response) {
-                        console.log("DATA POST SUCCESSFUL");
-                        console.log(response);
-                        feedbackContainer.innerHTML = "";
-                        $("#create-modal").modal('hide');
-                        $("#feedback-form")[0].reset();
+                        if (data['feedback'] != "") {
+                            console.log("DATA POST SUCCESSFUL");
+                            console.log(response);
+                            feedbackContainer.innerHTML = "";
+                            console.log(data)
+                            $("#create-modal").modal('hide');
+                            $("#feedback-form")[0].reset();
+                            $("#thankyou-modal").modal('show');
+                        } else {
+                            $("#empty-modal").modal('show');
+                        }
                         showFeedback();
-                        $("#thankyou-modal").modal('show');
                     }
                 });
             });
