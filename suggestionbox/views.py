@@ -23,7 +23,8 @@ def replyFeedback(request, id):
     if request.method == 'POST':
         feedback = UserFeedback.objects.get(id=id)
         feedback.reply = request.POST['reply']
-        feedback.save()
+        if feedback.reply != '':
+            feedback.save()
         return HttpResponse(serializers.serialize('json', [feedback]), content_type='application/json')
     return HttpResponse("")
 
@@ -36,6 +37,7 @@ def giveFeedback(request):
             feedback = request.POST['feedback'],
             reply = 'Belum dibalas',
         )
-        feedback.save()
+        if feedback.feedback != '':
+            feedback.save()
         return HttpResponse(serializers.serialize('json', [feedback]), content_type='application/json')
     return HttpResponse("")
