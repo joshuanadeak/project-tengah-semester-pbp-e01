@@ -49,7 +49,7 @@ def show_market_json(request):
 
 @login_required(login_url='/authenticate/login/')
 def show_note_json(request):
-    note = Note.objects.order_by('id')
+    note = Note.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", note), content_type="application/json")
 
 @login_required(login_url='/authenticate/login/')
@@ -68,7 +68,8 @@ def add_note(request):
     form = NoteForm(request.POST)
     if form.is_valid():
         catatan = form.cleaned_data["catatan"]
-        Note.objects.all().delete()
+        note_del = Note.objects.filter(user=request.user)
+        note_del.delete()
         note_baru = Note.objects.create(catatan = catatan, user=request.user)
         return JsonResponse({'error': False, 'msg':'Successful'})
 
