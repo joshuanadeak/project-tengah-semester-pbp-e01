@@ -4,14 +4,6 @@
 <html lang="en" dir="ltr">
 
 {% block meta %}
-<style>
-    body{
-        padding-top: 120px;
-        padding-right: 7%;
-        padding-left: 7%;
-        padding-bottom: 5%;
-    } 
-</style>
 <title>Crypto Market</title>
 {% endblock meta %}
 
@@ -21,9 +13,10 @@
     crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="{% static 'js/ajax_crypto_market.js' %}"></script>
+<link href="{% static 'css/marketcrypto.css' %}" rel="stylesheet" />
 
 <body>
-    <h1 style="font-family: Kanit; display: inline; font-weight: bolder;">INVESTOPS <span style="color: rgb(4, 169, 4); display: inline;">WATCHLIST</span></h1>
+    <h1 class="judul">INVESTOPS <span class="hijaupembuka">WATCHLIST</span></h1>
     <table class="table table-striped">
         <thead>
             <tr class="">
@@ -40,7 +33,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: Mulish; font-weight: bold;">ADD CRYPTO</h1>
+                    <h1 class="modal-title fs-5 modalAwal" id="exampleModalLabel">ADD CRYPTO</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="addTaskForm">
@@ -68,13 +61,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <h4 style="font-family: Mulish; font-weight: bold; color: rgb(4, 169, 4)">Pembelian Berhasil!</h4>
-                    <h5 style="font-family: Mulish; font-weight: bold; ">Silakan lihat portofolio anda</h5>
+                    <h4 class="beliBerhasil">Pembelian Berhasil!</h4>
+                    <h5 class="lihatPorto">Silakan lihat portofolio anda</h5>
                 </div>
             </div>
         </div>
     </div>
-    <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+    <iframe class="dummyframe" name="dummyframe" id="dummyframe"></iframe>
     
     {% if user.is_superuser %}
     <button class="btn btn-success me-3" type="button" name="create-crypto" id="modalButton">

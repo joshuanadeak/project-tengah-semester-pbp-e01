@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block meta %}
+<title>Quiz</title>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+    body{
+        padding-top: 120px;
+        padding-right: 7%;
+        padding-left: 7%;
+        padding-bottom: 5%;
+        font-family: "Poppins", sans-serif;
+    }
+    h1, p {
+        font-family: "Poppins", sans-serif;
+    }
+</style>
+{% endblock meta %}
+
+{% block content %}
+<html lang="en" dir="ltr">
+    <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Login Form</title>
+<body>
+<div class = "flex justify-center">
+    <div>
+        <h1 class = "text-4xl font-bold"> Stock and Trading Quiz</h1>
+        <p class = "text-2xl">By INVESTOPS</p>
+        <br>
+        <p>It only takes a few minutes to train your knowledge and skill about stock and trading. </p>
+        <br>
+        <button class="h-12 w-48 bg-green-600 hover:bg-green-400 text-white py-2 px-4 rounded-full">
+            <a href="{% url 'trivia:show_quiz' %}">Start Quiz</a>
+          </button>
+    </div>
+</div>
+{% endblock content %}
