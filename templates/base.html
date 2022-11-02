@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>Investocks</title>
+  <title>Investops</title>
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
   <!-- Bootstrap icons-->
@@ -53,9 +53,9 @@
               </ul>
             </li>
             <!--<li class="nav-item"><a class="nav-link me-lg-3" href="#watchlist">Watchlist</a></li>-->
-            <li class="nav-item"><a class="nav-link me-lg-3" href="#company">Company</a></li>
-            <li class="nav-item"><a class="nav-link me-lg-3" href="#academy">Academy</a></li>
-            <li class="nav-item"><a class="nav-link me-lg-3" href="#quiz">Quiz</a></li>
+            <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'registration:registration' %}">Company</a></li>
+            <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'elearning:discussions' %}">Academy</a></li>
+            <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'quiz:home' %}">Quiz</a></li>
             <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'suggestionbox:showFeedback' %}">Feedback</a>
             </li>
           </ul>

@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+(% load static %}
+
+{% block meta %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+<style>
+    body{
+        padding-top: 120px;
+        padding-right: 7%;
+        padding-left: 7%;
+        padding-bottom: 5%;
+    } 
+    
+</style>
+{% endblock %} 
+
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+
+    function getFormData($form) {
+        var unindexed_array = $form.serializeArray();
+        var indexed_array = {};
+
+        $.map(unindexed_array, function (n, i) {
+            indexed_array[n['name']] = n['value'];
+        });
+
+        return indexed_array;
+    }
+    
+$(document).ready(function () {
+    $("#answers").submit(function(event){
+        event.preventDefault()
+        var $form = $(this)
+        var dataSer = getFormData($form)
+
+        $.ajax({
+            url:"{% url 'trivia:add_answer' %}", 
+            type: "POST",
+            data: dataSer,
+            success: function(dict) {
+                window.location.pathname = `/quiz/result/${dict['id']}`
+            }, 
+            error: function(result){
+            }
+        });
+    })
+});
+</script>
+
+<div> 
+    <h1 class="text-center"> - QUIZ - </h1>
+</div>
+
+<form method="POST" id = "answers">
+    {% csrf_token %}  
+    <div id = "questions">
+        {% for question in form %}
+        <div class="card">
+            <div class="card-body" style="background-color: #a3ffd5;">
+                <b> {{ question.label }}</b>
+                </div>
+            </div>
+            <div class="card" style="margin-top: 10px;">
+                <div class="card-body">
+                <p>{{ question }}</p>
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+    </div>
+    <div class = "text-center">
+        <button type="submit" class="btn btn-success me-3 text-center">Submit Answers</button>
+    </div>
+</form>
+
+    {% for msg in messages %}
+        {{ msg }}
+    {% endfor %}
+
+{% endblock content %}

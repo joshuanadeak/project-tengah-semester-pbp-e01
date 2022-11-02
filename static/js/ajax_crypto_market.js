@@ -36,7 +36,7 @@ function getFormData($form) {
 }
 
 $(document).ready(function () {
-    $.getJSON("/crypto/mjson", displayStock);
+    $.getJSON("/crypto/mjson", displayCrypto);
     document.getElementById("modalButton").setAttribute('onclick', '$("#formModal").modal("show")');
     console.log("SEBELUM SUBMIT")
     $("#addTaskForm").submit(function (e) {
@@ -54,7 +54,7 @@ $(document).ready(function () {
                 console.log(response_data)
                 $(".btnClick").prop('disabled', false);
                 $(".btnClick").text('Submit');
-                $.getJSON("/crypto/mjson", displayStock);
+                $.getJSON("/crypto/mjson", displayCrypto);
                 $("#formModal").modal('hide');
                 $('#addTaskForm').each(function () {
                 this.reset();
