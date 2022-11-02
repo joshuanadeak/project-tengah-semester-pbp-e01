@@ -25,4 +25,5 @@ urlpatterns = [
     path('crypto/',include('crypto.urls')),
     path('elearning/', include('elearning.urls')),
     path('quiz/',include('quiz.urls', namespace='quiz')),
+    path('registration/', include('registration.urls')),
 ]
