@@ -1,5 +1,5 @@
 from django.urls import path
-from temp.views import register_company
+from registration.views import register_company
 
 app_name = 'stock'
 

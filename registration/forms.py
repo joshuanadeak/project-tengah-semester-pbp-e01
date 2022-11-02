@@ -1,7 +1,7 @@
 from django.forms import ModelForm
-from temp.models import CompanyRegistration
+from registration.models import CompanyRegistration
 
-class CompanyRegistrationForm(forms.Form):
+class CompanyRegistrationForm(ModelForm):
     class Meta:
         model = CompanyRegistration
         fields = '__all__'
