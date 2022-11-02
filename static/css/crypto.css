@@ -1,0 +1,38 @@
+body {
+    padding-top: 120px;
+    padding-right: 7%;
+    padding-left: 7%;
+    padding-bottom: 5%;
+}
+
+.pembuka{
+    font-family: Kanit;
+}
+
+.hijaupembuka{
+    color: rgb(4, 169, 4);
+}
+
+.modalAwal{
+    font-family: Mulish;
+    font-weight: bold;
+}
+
+.jualBerhasil{
+    font-family: Mulish;
+    font-weight: bold;
+    color: rgb(4, 169, 4);
+}
+
+.lihatPorto{
+    font-family: Mulish;
+    font-weight: bold;
+}
+
+.dummyframe{
+    display: none;
+}
+
+.note{
+    font-style: italic;
+}

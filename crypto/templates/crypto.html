@@ -4,14 +4,6 @@
 <html lang="en" dir="ltr">
 
 {% block meta %}
-<style>
-    body{
-        padding-top: 120px;
-        padding-right: 7%;
-        padding-left: 7%;
-        padding-bottom: 5%;
-    } 
-</style>
 <title>Crypto Portofolio</title>
 {% endblock meta %}
 
@@ -21,9 +13,10 @@
     crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="{% static 'js/ajax_crypto.js' %}"></script>
+<link href="{% static 'css/crypto.css' %}" rel="stylesheet" />
 
 <body>
-    <h3 style="font-family: Kanit">{{request.user.username}} <span style="color: rgb(4, 169, 4);">PORTOFOLIO</span></h3>
+    <h3 class="pembuka">{{request.user.username}} <span class="hijaupembuka">PORTOFOLIO</span></h3>
     <table class="table table-striped">
         <thead>
             <tr class="">
@@ -34,14 +27,13 @@
             </tr>
         </thead>
         <tbody id="crypto-table"></tbody>
-
     </table>
 
     <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: Mulish; font-weight: bold;">CHANGE NOTE</h1>
+                    <h1 class="modal-title fs-5 modalAwal" id="exampleModalLabel">CHANGE NOTE</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="addTaskForm">
@@ -66,22 +58,22 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center" >
-                    <h4 style="font-family: Mulish; font-weight: bold; color: rgb(4, 169, 4)">Penjualan Berhasil!</h4>
-                    <h5 style="font-family: Mulish; font-weight: bold; ">Silakan lihat portofolio anda</h5>
+                    <h4 class="jualBerhasil">Penjualan Berhasil!</h4>
+                    <h5 class="lihatPorto">Silakan lihat portofolio anda</h5>
                 </div>
             </div>
         </div>
     </div>
-    <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+    <iframe class="dummyframe" name="dummyframe" id="dummyframe"></iframe>
     <button class="btn btn-success me-3" type="button" name="change-note" id="modalButton">
         CHANGE NOTE
     </button>
     <a href="{% url 'crypto:show_market' %}" class="btn btn-outline-success">Watchlist</a></div>
 
     <br><br>
-    <p style="font-style: italic;"><i class="bi bi-pencil-fill"></i> Note:</p>
-    <p style="font-style: italic;">Your Notes Will Be Printed Below These Texts</p>
-    <p id="personal-note" style="font-style: italic;"></p>
+    <p class="note"><i class="bi bi-pencil-fill"></i> Note:</p>
+    <p class="note">Your Notes Will Be Printed Below These Texts</p>
+    <p class="note" id="personal-note"></p>
 
 </body>
 {% endblock content %}
