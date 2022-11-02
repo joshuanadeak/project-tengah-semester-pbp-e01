@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from suggestionbox.models import UserFeedback
 from django.http import HttpResponse
 from django.core import serializers
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import get_object_or_404
 # Create your views here.
 def checkAdmin(user):
     return user.is_superuser
@@ -41,3 +43,11 @@ def giveFeedback(request):
             feedback.save()
         return HttpResponse(serializers.serialize('json', [feedback]), content_type='application/json')
     return HttpResponse("")
+
+@user_passes_test(checkAdmin)
+@csrf_exempt
+def deleteFeedback(request, id):
+    if request.method == 'POST':
+        data = get_object_or_404(UserFeedback, id=id)
+        data.delete()
+    return HttpResponse()

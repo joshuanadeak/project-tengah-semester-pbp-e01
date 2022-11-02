@@ -10,5 +10,6 @@ urlpatterns = [
     path('giveFeedback/', suggestionbox.views.giveFeedback, name='giveFeedback'),
     path('replyFeedback/<str:id>/', suggestionbox.views.replyFeedback, name='replyFeedback'),
     path('showJson/', suggestionbox.views.showJson, name='showJson'),
+    path('deleteFeedback/<str:id>/', suggestionbox.views.deleteFeedback, name='deleteFeedback'),
 ]
 urlpatterns  += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
