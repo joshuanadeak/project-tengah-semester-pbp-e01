@@ -4,14 +4,14 @@
 <html lang="en">
 
 {% block meta %}
-<style>
+<!-- <style>
     body{
         padding-top: 120px;
         padding-right: 7%;
         padding-left: 7%;
         padding-bottom: 5%;
     } 
-</style>
+</style> -->
 <title>Portofolio</title>
 {% endblock meta %}
 
@@ -20,7 +20,7 @@
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
+<link href="{% static 'css/stock.css' %}" rel="stylesheet" />
 
 <script src="{% static 'js/ajax_stock.js' %}"></script>
  <!-- <script>
@@ -106,7 +106,8 @@
     });
 </script>  -->
 
-<h3 style="font-family: Kanit">{{request.user.username}} <span style="color: rgb(4, 169, 4);">PORTOFOLIO</span></h3>
+<!-- <h3 class="atas" style="font-family: Kanit">{{request.user.username}} <span style="color: rgb(4, 169, 4);" class="porwat">PORTOFOLIO</span></h3> -->
+<h3 class="atas" >{{request.user.username}} <span class="porwat">PORTOFOLIO</span></h3>
 <table class="table table-striped">
     <thead>
         <tr class="">
@@ -126,7 +127,9 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: Mulish; font-weight: bold;">CHANGE NOTE</h1>
+                <!-- <h1 class="modal-title fs-5 modalJudul" id="exampleModalLabel" style="font-family: Mulish; font-weight: bold;">CHANGE NOTE</h1> -->
+                <h1 class="modal-title fs-5 modalJudul" id="exampleModalLabel" >CHANGE
+                    NOTE</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="addTaskForm">
@@ -154,21 +157,30 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center" >
-                <h4 style="font-family: Mulish; font-weight: bold; color: rgb(4, 169, 4)">Penjualan Berhasil!</h4>
-                <h5 style="font-family: Mulish; font-weight: bold; ">Silakan lihat portofolio anda</h5>
+                <!-- <h4 style="font-family: Mulish; font-weight: bold; color: rgb(4, 169, 4)" class="jualBeli">Penjualan Berhasil!</h4>
+                <h5 style="font-family: Mulish; font-weight: bold; " class="pesanJB">Silakan lihat portofolio anda</h5> -->
+                <h4 class="jualBeli">Penjualan Berhasil!</h4>
+                <h5 class="pesanJB">Silakan lihat portofolio anda</h5>
             </div>
         </div>
     </div>
 </div>
-<iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+
+<!-- <iframe name="dummyframe" id="dummyframe" style="display: none;" class="framegtw"></iframe> -->
+<iframe name="dummyframe" id="dummyframe" style="display: none;" class="framegtw"></iframe>
+
 <button class="btn btn-success me-3" type="button" name="change-note" id="modalButton">
     CHANGE NOTE
 </button>
 <a href="{% url 'stock:show_market' %}" class="btn btn-outline-success">Watchlist</a></div>
 
 <br><br>
-<p style="font-style: italic;"><i class="bi bi-pencil-fill"></i> Note:</p>
-<p style="font-style: italic;">Jangan monopoli pasar saham dengan membeli semua saham ya :)</p>
-<p id="personal-note" style="font-style: italic;"></p>
+<!-- <p style="font-style: italic;" class="catatan"><i class="bi bi-pencil-fill"></i> Note:</p>
+<p style="font-style: italic;" class="catatan">Jangan monopoli pasar saham dengan membeli semua saham ya :)</p>
+<p id="personal-note" style="font-style: italic;" class="catatan"></p> -->
+
+<p class="catatan"><i class="bi bi-pencil-fill"></i> Note:</p>
+<p class="catatan">Jangan monopoli pasar saham dengan membeli semua saham ya :)</p>
+<p id="personal-note" class="catatan"></p> 
 
 {% endblock content %}

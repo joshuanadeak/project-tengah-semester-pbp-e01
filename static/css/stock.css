@@ -1,0 +1,38 @@
+.catatan{
+    font-style: italic;
+}
+
+.jualBeli{
+    font-family: Mulish;
+    font-weight: bold;
+    color: rgb(4, 169, 4);
+}
+
+.pesanJB{
+    font-family: Mulish;
+    font-weight: bold;
+}
+
+.atas{
+    font-family: Kanit;
+}
+
+.porwat{
+    color: rgb(4, 169, 4);
+}
+
+.modalJudul{
+    font-family: Mulish;
+    font-weight: bold;
+}
+
+.framegtw{
+    display: none;
+}
+
+body {
+    padding-top: 120px;
+    padding-right: 7%;
+    padding-left: 7%;
+    padding-bottom: 5%;
+}
