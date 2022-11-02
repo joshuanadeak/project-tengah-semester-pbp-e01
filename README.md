@@ -1,5 +1,7 @@
 # Proyek Tengah Semester Kelompok E01
 
+![deskripsi](https://github.com/joshuanadeak/project-tengah-semester-pbp-e01/actions/workflows/dpl.yml/badge.svg)
+
 ## Topic : Trade and Investment
 
 ## Investops
