@@ -33,4 +33,23 @@ class SuggestionBoxTest(TestCase):
         self.feedback.delete()
         self.assertEqual(UserFeedback.objects.count(), 0)
 
+    def test_show_feedback(self):
+        response = self.client.get('/suggestionbox/')
+        self.assertEqual(response.status_code, 302)
 
+    def test_give_feedback(self):
+        response = self.client.post('/suggestionbox/giveFeedback/', {'feedback': 'test'})
+        self.assertEqual(response.status_code, 302)
+
+    def test_reply_feedback(self):
+        response = self.client.post('/suggestionbox/replyFeedback/1/', {'reply': 'test'})
+        self.assertEqual(response.status_code, 302)
+
+    def test_show_json(self):
+        response = self.client.get('/suggestionbox/showJson/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_delete_feedback(self):
+        response = self.client.post('/suggestionbox/deleteFeedback/1/')
+        self.assertEqual(response.status_code, 302)
+    
