@@ -10,6 +10,7 @@
         padding-left: 7%;
         padding-bottom: 5%;
     } 
+    
 </style>
 {% endblock %} 
 
@@ -18,7 +19,31 @@
 <link rel="stylesheet" type="text/css" href="css/jquery.countdown.css"> 
 <script type="text/javascript" src="js/jquery.plugin.js"></script> 
 <script type="text/javascript" src="js/jquery.countdown.js"></script>
-<script>
+<script type="text/javascript">
+    
+    window.onload=counter;
+    function counter()
+    {
+    minutes =05
+    seconds =01;
+    countDown();
+    }
+
+    function countDown(){
+    document.getElementById("min").innerHTML= minutes;
+    document.getElementById("remain").innerHTML= seconds;
+    setTimeout("countDown()",1000);
+        if(minutes == 0 && seconds == 0){
+        }else {
+            seconds--;	
+            if(seconds ==0 && minutes > 0)
+            {
+                minutes--;
+                seconds=60;
+            }
+            }
+    }
+
     function getFormData($form) {
         var unindexed_array = $form.serializeArray();
         var indexed_array = {};
@@ -30,17 +55,24 @@
         return indexed_array;
     }
     
-    var minutes = 1, seconds = 59;
-    jQuery(function(){
-        jQuery("span.countdown").html(minutes + ":" + seconds);
-        var count = setInterval(function(){ if(parseInt(minutes) < 0) { clearInterval(count); } else {jQuery("span.countdown").html(minutes + ":" + seconds); if(seconds == 0) { minutes--; if(minutes < 10) minutes = "0"+minutes; seconds = 59;} seconds--; if(seconds < 10) minutes = "0"+seconds;} }, 1000);
-    })
-    
 $(document).ready(function () {
+    setTimeout(function() {
+        var $form = $(this)
+        var dataSer = getFormData($form)
+        $.ajax({
+            url:"{% url 'trivia:add_answer' %}", 
+            type: "POST",
+            data: dataSer,
+            success: function(dict) {
+                window.location.pathname = `/quiz/result/${dict['id']}`
+            }, 
+            error: function(result){
+            }
+        });
+    }, 5001); 
+    
     $("#answers").submit(function(event){
-        console.log("masuk")
         event.preventDefault()
-        //ngurusin button
         var $form = $(this)
         var dataSer = getFormData($form)
 
@@ -50,22 +82,65 @@ $(document).ready(function () {
             data: dataSer,
             success: function(dict) {
                 window.location.pathname = `/quiz/result/${dict['id']}`
-                console.log("masuk success")
             }, 
             error: function(result){
-                console.log("gagal")
             }
         });
     })
 });
+
+function submit_ans(){
+        var $form = $(this)
+        var dataSer = getFormData($form)
+        console.log(dataSer)
+        $.ajax({
+            url:"{% url 'trivia:add_answer' %}", 
+            type: "POST",
+            data: dataSer,
+            success: function(dict) {
+                console.log(dataSer)
+                console.log("masuk")
+                window.location.pathname = `/quiz/result/${dict['id']}`
+            }, 
+            error: function(result){
+            }
+        });
+}
+
 </script>
-<span class="countdown"></span>
+
+<div> 
+    <h1 class="text-center"> - QUIZ - </h1>
+</div>
+
+<div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+    <div class="card-header font-weight-bold">Time Remaining</div>
+    <div class = class-body style="float:left; display:flex; margin-left: 15px; margin-top: 10px;">
+        <span class="card-text text-danger" id="min" ></span> <p>&#160Minutes&#160</p>
+        <span class="card-text text-danger"  id="remain"></span> <p>&#160Seconds&#160</p>
+    </div>
+  </div>
+
 <form method="POST" id = "answers">
     {% csrf_token %}  
-    <div id = "questions" class = "grid gap-20">
-        {{ form }}
+    <div id = "questions">
+        {% for question in form %}
+        <div class="card">
+            <div class="card-body" style="background-color: #a3ffd5;">
+                <b> {{ question.label }}</b>
+                </div>
+            </div>
+            <div class="card" style="margin-top: 10px;">
+                <div class="card-body">
+                <p>{{ question }}</p>
+                </div>
+            </div>
+            <br>
+        {% endfor %}
     </div>
-    <button type="submit" class="h-12 w-48 bg-green-600 hover:bg-green-400 text-white py-2 px-4 rounded-full">Submit Answers</button>
+    <div class = "text-center">
+        <button type="submit" class="btn btn-success me-3 text-center">Submit Answers</button>
+    </div>
 </form>
 
     {% for msg in messages %}

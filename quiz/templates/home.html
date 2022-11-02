@@ -6,24 +6,15 @@
 <title>Quiz</title>
 
 <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
     body{
         padding-top: 120px;
         padding-right: 7%;
         padding-left: 7%;
         padding-bottom: 5%;
+        background-color: #a3ffd5;
     } 
-</style>
-{% endblock meta %}
-
-{% block content %}
-<html lang="en" dir="ltr">
-    <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Login Form</title>
-    <head>
-<style>
-    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
 
     *,
     *::before,
@@ -430,18 +421,28 @@
     }
     }
 </style>
-</head>
-    <body>
-<div class = "flex justify-center">
+{% endblock meta %}
+
+{% block content %}
+<html lang="en" dir="ltr">
+    <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+<div class = "text-center" style="margin-top:150px;  padding: 3em .5em .5em; border-radius: 2em; box-shadow: 0 5px 10px rgba(0,0,0,.2); background-color:#fff">
     <div>
-        <h1 class = "text-4xl font-bold"> Stock and Trading Quiz</h1>
-        <p class = "text-2xl">By INVESTOPS</p>
-        <br>
+        <h1 class = "font-bold"> Stock and Trading Quiz</h1>
+        <p style="margin-bottom:30px;">By INVESTOPS</p>
         <p>It only takes a few minutes to train your knowledge and skill about stock and trading. </p>
         <br>
-        <button class="h-12 w-48 bg-green-600 hover:bg-green-400 text-white py-2 px-4 rounded-full">
-            <a href="{% url 'trivia:show_quiz' %}">Start Quiz</a>
-          </button>
     </div>
 </div>
+
+<div class="text-center" style="margin-top:50px">
+    <button class="btn btn-success me-3 text-center">
+        <a href="{% url 'trivia:show_quiz' %}" class="link-light">Start Quiz</a>
+    </button>
+</div>
+
 {% endblock content %}

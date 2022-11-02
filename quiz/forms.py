@@ -49,7 +49,7 @@ class QuizForm(forms.Form):
         (False, "When one or two stocks drop significantly"),
         (False, "Slow decrease in stock prices over a year"),
         (False, "Rapid but anticipated drop in stock prices."),
-        (True, "rapid and unanticipated drop in stock prices"),
+        (True, "Rapid and unanticipated drop in stock prices"),
     ]
     CHOICES_Q8 = [
         (True, "NASDAQ & NYSE"),
@@ -68,33 +68,33 @@ class QuizForm(forms.Form):
         (True, "P/E RATIO"),
     ]
 
-    q1 = forms.ChoiceField(label = "What is the stock market?", choices = CHOICES_Q1, widget=forms.RadioSelect, error_messages = {
+    q1 = forms.ChoiceField(label = "1. What is the stock market?", choices = CHOICES_Q1, widget=forms.RadioSelect, error_messages = {
                  'required':"Please choose an option"
                  })
-    q2 = forms.ChoiceField(label = "The name for a part of a business that is bought and sold on the stock market is", choices = CHOICES_Q2, widget=forms.RadioSelect, error_messages = {
+    q2 = forms.ChoiceField(label = "2. The name for a part of a business that is bought and sold on the stock market is", choices = CHOICES_Q2, widget=forms.RadioSelect, error_messages = {
                  'required':"Please choose an option"
                  })
-    q3 = forms.ChoiceField(label = "What is a bond?", choices = CHOICES_Q3, widget=forms.RadioSelect, error_messages = {
+    q3 = forms.ChoiceField(label = "3. What is a bond?", choices = CHOICES_Q3, widget=forms.RadioSelect, error_messages = {
                  'required':"Please choose an option"
                  })
-    q4 = forms.ChoiceField(label = "IPO stands for", choices = CHOICES_Q4, widget=forms.RadioSelect, error_messages = {
+    q4 = forms.ChoiceField(label = "4. IPO stands for", choices = CHOICES_Q4, widget=forms.RadioSelect, error_messages = {
                  'required':"Please choose an option"
                  })
-    q5 = forms.ChoiceField(label = "A company owned by families or a small number of investors and do not issue stock to the public is called", choices = CHOICES_Q5, widget=forms.RadioSelect, error_messages = {
+    q5 = forms.ChoiceField(label = "5. A company owned by families or a small number of investors and do not issue stock to the public is called", choices = CHOICES_Q5, widget=forms.RadioSelect, error_messages = {
                  'required':"Please choose an option"
                  })
-    q6 = forms.ChoiceField(label = "A sum of money paid to shareholders of a corporation out of its earnings", choices = CHOICES_Q6, widget=forms.RadioSelect, error_messages = {
+    q6 = forms.ChoiceField(label = "6. A sum of money paid to shareholders of a corporation out of its earnings", choices = CHOICES_Q6, widget=forms.RadioSelect, error_messages = {
                  'required':"Please choose an option"
                  })
-    q7 = forms.ChoiceField(label = "What is a stock market crash?", choices = CHOICES_Q7, widget=forms.RadioSelect, error_messages = {
+    q7 = forms.ChoiceField(label = "7. What is a stock market crash?", choices = CHOICES_Q7, widget=forms.RadioSelect, error_messages = {
                  'required':"Please choose an option"
                  })
-    q8 = forms.ChoiceField(label = "The two major stock exchanges are", choices = CHOICES_Q8, widget=forms.RadioSelect, error_messages = {
+    q8 = forms.ChoiceField(label = "8. The two major stock exchanges are", choices = CHOICES_Q8, widget=forms.RadioSelect, error_messages = {
                  'required':"Please choose an option"
                  })
-    q9 = forms.ChoiceField(label = "Can interest rates affect the stock market?", choices = CHOICES_Q9, widget=forms.RadioSelect, error_messages = {
+    q9 = forms.ChoiceField(label = "9. Can interest rates affect the stock market?", choices = CHOICES_Q9, widget=forms.RadioSelect, error_messages = {
                  'required':"Please choose an option"
                  })
-    q10 = forms.ChoiceField(label = "Which of the following is NOT a stock index?", choices = CHOICES_Q10, widget=forms.RadioSelect, error_messages = {
+    q10 = forms.ChoiceField(label = "10. Which of the following is NOT a stock index?", choices = CHOICES_Q10, widget=forms.RadioSelect, error_messages = {
                  'required':"Please choose an option"
                  })
