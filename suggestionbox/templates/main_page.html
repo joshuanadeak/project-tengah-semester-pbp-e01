@@ -125,7 +125,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-6 g-4" id="feedback-container"></div>
     <div class="modal-container"></div>
 
@@ -151,7 +151,6 @@
         return data;
         }
 
-        
         async function showFeedback() {
             let feedbacks = getJson();
             for (let i = 0; i < feedbacks.length; i++) {
@@ -266,16 +265,29 @@
                 replyButton.innerHTML = '{% if user.is_superuser %} <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#reply-modal-' + id + '">Reply</button> {% endif %}';
                 button.appendChild(replyButton);
 
+                var deleteButton = document.createElement("div");
+                deleteButton.className = "col-sm";
+                deleteButton.innerHTML = '{% if user.is_superuser %} <button type="button" class="btn btn-danger" onclick="deleteFeedback(' + id + ')">Delete</button> {% endif %}';
+                button.appendChild(deleteButton);
+
                 $("#reply-form-" + id).submit(function (e) {
                     e.preventDefault();
                     var form = $(this);
                     var url = form.attr('action');
+                    var emptyCode = 0;
+
+                    if ($("#reply").val() == "") {
+                        emptyCode = 1;
+                    }
+
                     $.ajax({
                         type: "POST",
                         url: url,
                         data: form.serialize(),
                         success: function (data) {
-                            if (Object.keys(data).length != 0) {
+                            if (emptyCode == 1) {
+                                alert("Reply cannot be empty!");
+                            } else {
                                 console.log("DATA POST SUCCESSFUL");
                                 console.log(data);
                                 location.reload();
@@ -287,6 +299,25 @@
                 });
             }
             }
+
+            async function deleteFeedback(id) {
+                var url = "/suggestionbox/deleteFeedback/" + id + "/";
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: {
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    success: function (data) {
+                        if (Object.keys(data).length != 0) {
+                            console.log("DATA POST SUCCESSFUL");
+                            console.log(data);
+                        }
+                        location.reload();
+                    }
+                });
+            }
+
             $(document).ready(function () {
                 console.log("READY");
                 showFeedback();
