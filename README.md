@@ -56,7 +56,7 @@ This app explains itself in it's name, it's a suggestion box where users can giv
 1. Admin : An admin can reply to the feedback given by the user and also delete it. This reply will then be displayed in cards along with the feedback in question.
 2. User : A user can submit a form containing their feedback to this app, this feedback will then be displayed in cards. If it is not replied by the admin yet, the response field will be empty.
 
-## Username dan Password for Dummy
+## Username and Password for Dummy
 Username: `Dummy1`
 Password: `Indonesia2020`
 
