@@ -1,0 +1,28 @@
+{% load static %} {% block meta %}
+<title>Login</title>
+
+{% endblock meta %} {% block content %}
+<!-- username password login -->
+<div class="login">
+    <form method="POST" action="">
+        {% csrf_token %}
+        <h3>Login Here!</h3>
+
+        <label for="username">Username</label>
+        <input type="text" name="username" placeholder="Username">
+
+        <label for="password">Password</label>
+        <input type="password" name="password" placeholder="Password" class="form-control">
+
+        <button type="submit" value="Login">Log In</button>
+        <p>Don't have an account? <a href="{% url 'elearning:register' %}"> Sign Up</a></p>
+
+        {% if messages %} {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %} {% endif %}
+    </form>
+
+
+
+</div>
+{% endblock content %}
