@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'crypto',
     'elearning',
     'quiz',
+    'registration,'
 ]
 
 MIDDLEWARE = [
