@@ -13,19 +13,17 @@
     } 
 </style>
 <title>Portofolio</title>
-<!-- <script src="{% static 'js/implemen_ajax.js' %}"></script> -->
 {% endblock meta %}
 
 {% block content %}
-<!-- <script src="{% static 'js/implemen_ajax.js' %}"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 
-
- <script>
+<script src="{% static 'js/ajax_stock.js' %}"></script>
+ <!-- <script>
     function getFormData($form) {
         var unindexed_array = $form.serializeArray();
         var indexed_array = {};
@@ -52,11 +50,6 @@
         console.log("INI MASUK DISPLAY NOTEE")
         console.log(json)
         $("#personal-note").text(json[0].fields.catatan)
-        // for (var i = 0; i < json.length; i++) {
-        //     console.log("ini fie")
-        //     console.log(json[i].fields)
-        //     $("#market-table").append("<tr><td>" + json[i].fields.kode_saham + "</td><td>" + json[i].fields.nama_perusahaan + "</td><td>" + json[i].fields.harga_saham + "</td><td>" + json[i].fields.risk + "</td><td>" + button(json[i].pk) + "</td></tr>")
-        // }
     }
 
     function updateStock() {
@@ -111,7 +104,7 @@
             });
         });
     });
-</script> 
+</script>  -->
 
 <h3 style="font-family: Kanit">{{request.user.username}} <span style="color: rgb(4, 169, 4);">PORTOFOLIO</span></h3>
 <table class="table table-striped">
@@ -133,7 +126,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: Kanit;">CHANGE NOTE</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: Mulish; font-weight: bold;">CHANGE NOTE</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="addTaskForm">
