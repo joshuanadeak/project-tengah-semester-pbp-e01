@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+<html>
+<title> Registration page</title>
+<style>
+    body{
+        padding-top: 120px;
+        padding-right: 7%;
+        padding-left: 7%;
+        padding-bottom: 5%;
+        background-color: #a3ffd5;
+    } 
+</style>
+
+{% block content %}
+<body>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Company Registration Page</h1>
+<form action="/registration/" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
+{% endblock content %}
