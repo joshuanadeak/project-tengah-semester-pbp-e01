@@ -4,7 +4,7 @@
 <html lang="en" dir="ltr">
 
 {% block meta %}
-<title>Crypto Portofolio</title>
+<title>Crypto Market</title>
 {% endblock meta %}
 
 {% block content %}
@@ -12,11 +12,11 @@
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="{% static 'js/ajax_crypto.js' %}"></script>
-<link href="{% static 'css/crypto.css' %}" rel="stylesheet" />
+<script src="{% static 'js/ajax_crypto_market.js' %}"></script>
+<link href="{% static 'css/marketcrypto.css' %}" rel="stylesheet" />
 
 <body>
-    <h3 class="pembuka">{{request.user.username}} <span class="hijaupembuka">PORTOFOLIO</span></h3>
+    <h1 class="judul">INVESTOPS <span class="hijaupembuka">WATCHLIST</span></h1>
     <table class="table table-striped">
         <thead>
             <tr class="">
@@ -26,54 +26,60 @@
                 <th>Risk</th>
             </tr>
         </thead>
-        <tbody id="crypto-table"></tbody>
+        <tbody id="market-table"></tbody>
     </table>
-
+        
     <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5 modalAwal" id="exampleModalLabel">CHANGE NOTE</h1>
+                    <h1 class="modal-title fs-5 modalAwal" id="exampleModalLabel">ADD CRYPTO</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="addTaskForm">
                     {% csrf_token %}
                     <div class="modal-body form-control">
                         <fieldset>
-                            <input class="form-control mb-3" type="text" placeholder="Masukan Note" name="note">
+                            <input class="form-control mb-3" type="text" placeholder="Kode Crypto (4 Huruf)" name="kode_crypto">
+                            <input class="form-control mb-3" type="text" placeholder="Nama Crypto" name="nama_crypto">
+                            <input class="form-control mb-3" type="text" placeholder="Price" name="harga_crypto">
+                            <input class="form-control mb-3" type="text" placeholder="Risk (HIGH / LOW)" name="risk">
                         </fieldset>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCEL</button>
-                        <button type="submit" class="btn btn-primary btnClick">CHANGE</button>
+                        <button type="submit" class="btn btn-primary btnClick">ADD</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="sellModal" tabindex="-1" aria-labelledby="Thank you" aria-hidden="true">
+    <div class="modal fade" id="buyModal" tabindex="-1" aria-labelledby="Thank you" aria-hidden="true">
         <div class="modal-dialog modal-confirm">
             <div class="modal-content">
                 <div class="modal-header justify-content-center">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body text-center" >
-                    <h4 class="jualBerhasil">Penjualan Berhasil!</h4>
+                <div class="modal-body text-center">
+                    <h4 class="beliBerhasil">Pembelian Berhasil!</h4>
                     <h5 class="lihatPorto">Silakan lihat portofolio anda</h5>
                 </div>
             </div>
         </div>
     </div>
     <iframe class="dummyframe" name="dummyframe" id="dummyframe"></iframe>
-    <button class="btn btn-success me-3" type="button" name="change-note" id="modalButton">
-        CHANGE NOTE
+    
+    {% if user.is_superuser %}
+    <button class="btn btn-success me-3" type="button" name="create-crypto" id="modalButton">
+        ADD CRYPTO
     </button>
-    <a href="{% url 'crypto:show_market' %}" class="btn btn-outline-success">Watchlist</a></div>
-
-    <br><br>
-    <p class="note"><i class="bi bi-pencil-fill"></i> Note:</p>
-    <p class="note">Your Notes Will Be Printed Below These Texts</p>
-    <p class="note" id="personal-note"></p>
+    {% else %}
+    <button class="btn btn-success me-3" type="button" name="create-crypto" id="modalButton" disabled>
+        ADD CRYPTO
+    </button>
+    {% endif %}
+    
+    <a href="{% url 'crypto:show_crypto' %}" class="btn btn-outline-success">Portofolio</a>
 
 </body>
 {% endblock content %}

@@ -5,7 +5,7 @@ from django.conf import settings
 
 # Create your models here.
 class Saham(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     kode_saham = models.CharField(max_length=10, default="ABCD")
     nama_perusahaan = models.TextField(default="PT ABCD Tbk.")
     harga_saham = models.IntegerField()
@@ -18,5 +18,5 @@ class Pasar(models.Model):
     risk = models.CharField(max_length=10)
 
 class Note(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     catatan = models.TextField(default="jangan monopoli saham yaa")

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+(% load static %}
+
+{% block meta %}
+<style>
+    body{
+        padding-top: 120px;
+        padding-right: 7%;
+        padding-left: 7%;
+        padding-bottom: 5%;
+    } 
+</style>
+{% endblock %} 
+
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    function getFormData($form) {
+        var unindexed_array = $form.serializeArray();
+        var indexed_array = {};
+
+        $.map(unindexed_array, function (n, i) {
+            indexed_array[n['name']] = n['value'];
+        });
+
+        return indexed_array;
+    }
+    
+$(document).ready(function () {
+    const url = window.location.pathname.split("/");
+    console.log(url[url.length - 2]);
+    $.get(`/quiz/json/${url[url.length - 2]}`, function(data) {
+        console.log(data)
+        $('#result').append(
+            `<div class="card text-center">
+            <div class="card-header">
+                Featured
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+            <div class="card-footer text-muted">
+                2 days ago
+            </div>
+            </div>`
+        )
+    })
+});
+</script>
+
+<div id = "result">
+
+</div>
+{% endblock %} 
