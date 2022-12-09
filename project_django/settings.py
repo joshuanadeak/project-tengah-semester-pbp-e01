@@ -34,6 +34,13 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 # Application definition
+CORS_ALLOW_ALL_ORIGINS=True
+CORS_ALLOW_CREDENTIALS=True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'None'
+CSRF_TRUSTED_ORIGINS = ['https://web-production-53e0.up.railway.app/', 'http://127.0.0.1:8000/']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -50,9 +57,11 @@ INSTALLED_APPS = [
     'elearning',
     'quiz',
     'registration',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
