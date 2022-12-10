@@ -19,6 +19,7 @@ def login_user(request):
             response = HttpResponseRedirect(reverse("example_app:index"))
             response.set_cookie("last_login", str(datetime.datetime.now()))
             return JsonResponse({
+                "username": username,
                "status": True,
                "message": "Successfully Logged In!"
                # Insert any extra data if you want to pass data to Flutter
@@ -56,9 +57,11 @@ def register(request):
         'last_login': request.COOKIES.get('last_login')
     }
     return render(request, "register.html", context)
-
+    
+@csrf_exempt
 def logout_user(request):
     logout(request)
-    response = HttpResponseRedirect(reverse("example_app:index"))
-    response.delete_cookie("last_login")
-    return response
+    return JsonResponse({
+        "status": True,
+        "message": "Successfully logged out"
+    }, status=200)

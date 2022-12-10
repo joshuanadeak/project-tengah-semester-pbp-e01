@@ -53,6 +53,7 @@ def show_note_json(request):
     return HttpResponse(serializers.serialize("json", note), content_type="application/json")
 
 # @login_required(login_url='/authenticate/login/')
+@csrf_exempt
 def add_stock(request):
     form = StockForm(request.POST)
     if form.is_valid():
