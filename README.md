@@ -57,7 +57,7 @@ This app explains itself in it's name, it's a suggestion box where users can giv
 2. User : A user can submit a form containing their feedback to this app, this feedback will then be displayed in cards. If it is not replied by the admin yet, the response field will be empty.
 
 ## Username and Password for Dummy
-Username: `Dummy1`.
-Password: `Indonesia2020`.
+Username: `Dummy1`
+Password: `Indonesia2020`
 
 For admin access, please notify us, so that we can ensure the stability of our website. Sorry for the inconvenience and thank you for your attention.
