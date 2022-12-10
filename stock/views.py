@@ -18,7 +18,7 @@ from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
-@login_required(login_url='/authenticate/login/')
+# @login_required(login_url='/authenticate/login/')
 def show_stock(request):
     daftar_saham = Saham.objects.filter(user=request.user)
     context = {
@@ -28,7 +28,7 @@ def show_stock(request):
     }
     return render(request, "stock.html", context)
 
-@login_required(login_url='/authenticate/login/')
+# @login_required(login_url='/authenticate/login/')
 def show_market(request):
     pasar_saham = Pasar.objects.all()
     context = {
@@ -37,22 +37,22 @@ def show_market(request):
     }
     return render(request, "market.html", context)
 
-@login_required(login_url='/authenticate/login/')
+# @login_required(login_url='/authenticate/login/')
 def show_stock_json(request):
     data_saham = Saham.objects.filter(user=request.user).order_by('id')
     return HttpResponse(serializers.serialize("json", data_saham), content_type="application/json")
 
-@login_required(login_url='/authenticate/login/')
+# @login_required(login_url='/authenticate/login/')
 def show_market_json(request):
     pasar_saham = Pasar.objects.order_by('id')
     return HttpResponse(serializers.serialize("json", pasar_saham), content_type="application/json")
 
-@login_required(login_url='/authenticate/login/')
+# @login_required(login_url='/authenticate/login/')
 def show_note_json(request):
     note = Note.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", note), content_type="application/json")
 
-@login_required(login_url='/authenticate/login/')
+# @login_required(login_url='/authenticate/login/')
 @csrf_exempt
 def add_stock(request):
     form = StockForm(request.POST)
@@ -64,7 +64,7 @@ def add_stock(request):
         saham_baru = Pasar.objects.create(kode_saham = kode_saham, nama_perusahaan = nama_perusahaan, harga_saham = harga_saham, risk = risk)
         return JsonResponse({'error': False, 'msg':'Successful'})
 
-@login_required(login_url='/authenticate/login/')
+# @login_required(login_url='/authenticate/login/')
 def add_note(request):
     form = NoteForm(request.POST)
     if form.is_valid():
@@ -74,7 +74,7 @@ def add_note(request):
         note_baru = Note.objects.create(catatan = catatan, user=request.user)
         return JsonResponse({'error': False, 'msg':'Successful'})
 
-@login_required(login_url='/authenticate/login/')
+# @login_required(login_url='/authenticate/login/')
 @csrf_exempt
 def delete_stock(request, stock_id):
     if request.method =="POST":
@@ -83,7 +83,7 @@ def delete_stock(request, stock_id):
         stock_del.delete()
         return JsonResponse({'error':False})
 
-@login_required(login_url='/authenticate/login/')
+# @login_required(login_url='/authenticate/login/')
 @csrf_exempt
 def delete_market(request, market_id):
     if request.method =="POST":
