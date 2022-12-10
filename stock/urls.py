@@ -7,7 +7,7 @@ app_name = 'stock'
 
 urlpatterns = [
     path('', show_market, name='show_market'),
-    path('porto/', show_stock, name='show_stock'),
+    path('porto', show_stock, name='show_stock'),
     path('mjson/', show_market_json, name='show_market_json'),
     path('porto/njson/', show_note_json, name='show_note_json'),
     path('add/', add_stock, name='add_stock'),
