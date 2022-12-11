@@ -21,6 +21,7 @@ def showJson(request):
         return HttpResponse(serializers.serialize('json', data), content_type='application/json')
 
 @user_passes_test(checkAdmin)
+@csrf_exempt
 def replyFeedback(request, id):
     if request.method == 'POST':
         feedback = UserFeedback.objects.get(id=id)
@@ -32,9 +33,14 @@ def replyFeedback(request, id):
 
 @csrf_exempt
 def giveFeedback(request):
-    if request.method == 'POST':   
+    if request.method == 'POST':
+        username = ""
+        try:
+            username = request.POST['username']
+        except:
+            username = "Anonymous"
         feedback = UserFeedback(
-            username='Anonymous User',
+            username=username,
             feedback = request.POST['feedback'],
             reply = 'Belum dibalas',
         )
