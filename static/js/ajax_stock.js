@@ -34,7 +34,7 @@
     function deleteStock(pk) {
         console.log(pk)
         $.ajax({
-        url: `delete_stock/${pk}`,
+        url: `/stock/delete_stock/${pk}`,
     type: 'post',
     data: { },
     success: function(){
