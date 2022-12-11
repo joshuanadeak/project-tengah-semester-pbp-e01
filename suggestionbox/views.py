@@ -6,9 +6,20 @@ from django.http import HttpResponse
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import User
+from django.http import JsonResponse
+
 # Create your views here.
-def checkAdmin(user):
-    return user.is_superuser
+@csrf_exempt
+def checkAdmin(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        user = User.objects.get(username=username)
+        if user.is_superuser:
+             return JsonResponse({'admin': 'True'}, status=200)
+        else:
+            return JsonResponse({'admin': 'False'}, status=201)
+
 
 @login_required(login_url='/authenticate/login/')
 def showFeedback(request):
