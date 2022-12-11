@@ -20,7 +20,7 @@ def showJson(request):
         data = UserFeedback.objects.all()
         return HttpResponse(serializers.serialize('json', data), content_type='application/json')
 
-@user_passes_test(checkAdmin)
+# @user_passes_test(checkAdmin)
 @csrf_exempt
 def replyFeedback(request, id):
     if request.method == 'POST':
@@ -49,7 +49,7 @@ def giveFeedback(request):
         return HttpResponse(serializers.serialize('json', [feedback]), content_type='application/json')
     return HttpResponse("")
 
-@user_passes_test(checkAdmin)
+# @user_passes_test(checkAdmin)
 @csrf_exempt
 def deleteFeedback(request, id):
     if request.method == 'POST':
