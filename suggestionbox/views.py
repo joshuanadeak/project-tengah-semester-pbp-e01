@@ -30,12 +30,11 @@ def replyFeedback(request, id):
         return HttpResponse(serializers.serialize('json', [feedback]), content_type='application/json')
     return HttpResponse("")
 
-@login_required(login_url='/authenticate/login/')
+@csrf_exempt
 def giveFeedback(request):
     if request.method == 'POST':   
         feedback = UserFeedback(
-            user = request.user,
-            username=request.user.username,
+            username='Anonymous User',
             feedback = request.POST['feedback'],
             reply = 'Belum dibalas',
         )
