@@ -17,7 +17,7 @@ from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
-@login_required(login_url='/authenticate/login/')
+# @login_required(login_url='/authenticate/login/')
 def show_crypto(request):
     daftar_crypto = Crypto.objects.all()
     context = {
@@ -27,7 +27,7 @@ def show_crypto(request):
     }
     return render(request, "crypto.html", context)
 
-@login_required(login_url='/authenticate/login/')
+# @login_required(login_url='/authenticate/login/')
 def show_market(request):
     crypto_market = Market.objects.all()
     context = {
@@ -36,17 +36,18 @@ def show_market(request):
     }
     return render(request, "markets.html", context)
 
-@login_required(login_url='/authenticate/login/')
+# @login_required(login_url='/authenticate/login/')
 def show_crypto_json(request):
     crypto = Crypto.objects.filter(user=request.user).order_by('id')
     return HttpResponse(serializers.serialize("json", crypto), content_type="application/json")
 
-@login_required(login_url='/authenticate/login/')
+# @login_required(login_url='/authenticate/login/')
 def show_market_json(request):
     market = Market.objects.order_by('id')
     return HttpResponse(serializers.serialize("json", market), content_type="application/json")
 
-@login_required(login_url='/authenticate/login/')
+# @login_required(login_url='/authenticate/login/')
+@csrf_exempt
 def add_crypto(request):
     form = CryptoForm(request.POST)
     if form.is_valid():
@@ -57,7 +58,7 @@ def add_crypto(request):
         new_crypto = Market.objects.create(kode_crypto = kode_crypto, nama_crypto = nama_crypto, harga_crypto = harga_crypto, risk = risk)
         return JsonResponse({'error': False, 'msg':'Successful'})
 
-@login_required(login_url='/authenticate/login/')
+# @login_required(login_url='/authenticate/login/')
 @csrf_exempt
 def delete_crypto(request, stock_id):
     if request.method =="POST":
@@ -66,7 +67,7 @@ def delete_crypto(request, stock_id):
         delete_crypto.delete()
         return JsonResponse({'error':False})
 
-@login_required(login_url='/authenticate/login/')
+# @login_required(login_url='/authenticate/login/')
 @csrf_exempt
 def delete_market(request, market_id):
     if request.method =="POST":
@@ -75,12 +76,12 @@ def delete_market(request, market_id):
         delete_from_market.delete()
         return JsonResponse({'error':False})
 
-@login_required(login_url='/authenticate/login/')
+# @login_required(login_url='/authenticate/login/')
 def show_notes_json(request):
     note = Notes.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", note), content_type="application/json")
 
-@login_required(login_url='/authenticate/login/')
+# @login_required(login_url='/authenticate/login/')
 def add_note(request):
     form = NotesForm(request.POST)
     if form.is_valid():
