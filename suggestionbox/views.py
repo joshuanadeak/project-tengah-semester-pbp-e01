@@ -49,7 +49,10 @@ def giveFeedback(request):
         try:
             username = request.POST['username']
         except:
-            username = "Anonymous"
+            try:
+                username = request.user.username
+            except:
+                username = "Anonymous"
         feedback = UserFeedback(
             username=username,
             feedback = request.POST['feedback'],
