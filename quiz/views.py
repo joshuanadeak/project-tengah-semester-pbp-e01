@@ -46,11 +46,7 @@ def add_answer(request):
         if (form.is_valid()):
             data_input = form.cleaned_data
 
-            for i in data_input:
-                if (data_input[i] == "True"):
-                    skor=skor+10
-
-    quiz = Quiz.objects.create(user=request.user, score=skor)
+    quiz = Quiz.objects.create(user=request.user, score = float(request.POST.get(score)))
     return JsonResponse({'id': quiz.pk})
 
 @login_required(login_url='/authenticate/login/')
