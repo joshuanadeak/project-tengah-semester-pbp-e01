@@ -49,9 +49,9 @@ def giveFeedback(request):
         try:
             username = request.POST['username']
         except:
-            try:
+            if request.user.is_authenticated:
                 username = request.user.username
-            except:
+            else:
                 username = "Anonymous"
         feedback = UserFeedback(
             username=username,
