@@ -46,7 +46,7 @@ def add_answer(request):
         if (form.is_valid()):
             data_input = form.cleaned_data
 
-    quiz = Quiz.objects.create(user=request.user, score = float(request.POST.get(score)))
+    quiz = Quiz.objects.create(user=request.user, score = float(request.POST.get("score")))
     return JsonResponse({'id': quiz.pk})
 
 @login_required(login_url='/authenticate/login/')
