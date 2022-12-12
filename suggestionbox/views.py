@@ -70,3 +70,11 @@ def deleteFeedback(request, id):
         data = get_object_or_404(UserFeedback, id=id)
         data.delete()
     return HttpResponse()
+
+@csrf_exempt
+def deleteFeedbackFlutter(request):
+    if request.method == 'POST':
+        id = request.POST['id']
+        data = get_object_or_404(UserFeedback, id=id)
+        data.delete()
+    return JsonResponse({'status': 'success'}, status=200)
