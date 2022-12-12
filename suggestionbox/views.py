@@ -6,9 +6,20 @@ from django.http import HttpResponse
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import User
+from django.http import JsonResponse
+
 # Create your views here.
-def checkAdmin(user):
-    return user.is_superuser
+@csrf_exempt
+def checkAdmin(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        user = User.objects.get(username=username)
+        if user.is_superuser:
+             return JsonResponse({'admin': 'True'}, status=200)
+        else:
+            return JsonResponse({'admin': 'False'}, status=201)
+
 
 @login_required(login_url='/authenticate/login/')
 def showFeedback(request):
@@ -20,7 +31,8 @@ def showJson(request):
         data = UserFeedback.objects.all()
         return HttpResponse(serializers.serialize('json', data), content_type='application/json')
 
-@user_passes_test(checkAdmin)
+# @user_passes_test(checkAdmin)
+@csrf_exempt
 def replyFeedback(request, id):
     if request.method == 'POST':
         feedback = UserFeedback.objects.get(id=id)
@@ -30,12 +42,19 @@ def replyFeedback(request, id):
         return HttpResponse(serializers.serialize('json', [feedback]), content_type='application/json')
     return HttpResponse("")
 
-@login_required(login_url='/authenticate/login/')
+@csrf_exempt
 def giveFeedback(request):
-    if request.method == 'POST':   
+    if request.method == 'POST':
+        username = ""
+        try:
+            username = request.POST['username']
+        except:
+            if request.user.is_authenticated:
+                username = request.user.username
+            else:
+                username = "Anonymous"
         feedback = UserFeedback(
-            user = request.user,
-            username=request.user.username,
+            username=username,
             feedback = request.POST['feedback'],
             reply = 'Belum dibalas',
         )
@@ -44,10 +63,18 @@ def giveFeedback(request):
         return HttpResponse(serializers.serialize('json', [feedback]), content_type='application/json')
     return HttpResponse("")
 
-@user_passes_test(checkAdmin)
+# @user_passes_test(checkAdmin)
 @csrf_exempt
 def deleteFeedback(request, id):
     if request.method == 'POST':
         data = get_object_or_404(UserFeedback, id=id)
         data.delete()
     return HttpResponse()
+
+@csrf_exempt
+def deleteFeedbackFlutter(request):
+    if request.method == 'POST':
+        id = request.POST['id']
+        data = get_object_or_404(UserFeedback, id=id)
+        data.delete()
+    return JsonResponse({'status': 'success'}, status=200)

@@ -11,5 +11,7 @@ urlpatterns = [
     path('replyFeedback/<str:id>/', suggestionbox.views.replyFeedback, name='replyFeedback'),
     path('showJson/', suggestionbox.views.showJson, name='showJson'),
     path('deleteFeedback/<str:id>/', suggestionbox.views.deleteFeedback, name='deleteFeedback'),
+    path('checkAdmin/', suggestionbox.views.checkAdmin, name='checkAdmin'),
+    path('deleteFeedbackFlutter/', suggestionbox.views.deleteFeedbackFlutter, name='deleteFeedbackFlutter'),
 ]
 urlpatterns  += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
